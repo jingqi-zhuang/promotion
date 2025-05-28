@@ -2,12 +2,12 @@
 
 Based on last year’s transaction records, what is the probability that a customer will respond to a given promotion?
 
-<img src="/Users/apple/Desktop/promotion/images/promotion.png" style="zoom:50%;" />
+<img src="images/promotion.png" width="40%;" />
 
 
 This project presents the end-to-end process for building a predictive model to identify customers likely to respond to specific promotions. Using customer profiles, promotion details, and 20M+ historical transaction data, the model predicts a binary target variable, *“active”*, indicating promotion response. The workflow includes feature engineering, data pre-processing, model training, and performance evaluation, with implementation details outlined in the following sections.
 
-![](/Users/apple/Desktop/promotion/images/framework.png)
+<img src="images/framework.png" width="70%;" />
 
 ## Part 1: Feature Engineering
 
@@ -51,7 +51,7 @@ Binary features were created for frequently occurring values to reduce dimension
 
 - **Store:** A binary `store_625933` feature was created due to its high frequency.
 - **Category, Brand, Manufacturer:** IDs 2760698, 51006740 (categories), 1386413202, 324788825 (brands), and 1957688344, 122801592 (manufacturers) were each encoded as binary features.
-- **Region:** Only the top six regions were retained; all others were grouped into     "other."
+- **Region:** Only the top six regions were retained; all others were grouped into "other."
 
 ## Part 2: Data Preprocessing
 
@@ -84,7 +84,7 @@ The final model input consists of *26 engineered and pre-processed features.*
 
 ### Experiment Setup
 
-<img src="/Users/apple/Desktop/promotion/images/experiment.png" style="zoom:50%;" />
+<img src="images/experiment.png" width="40%;" />
 
 Following pre-processing, the 20,000 records were split into an 80:20 training-test split, yielding 16,000 training and 4,000 evaluation records. 
 
@@ -92,7 +92,7 @@ Following pre-processing, the 20,000 records were split into an 80:20 training-t
 
 **Tree-based classifiers—including XGBoost, LightGBM, and Random Forest**—were experimented due to their strength in handling high-dimensional, non-linear data. These models are robust to skewed feature distributions and insensitive to scaling, and they can capture complex variable interactions without explicit feature engineering. However, due to the significant class imbalance (with inactive responses outnumbering active ones 4:1), individual classifiers showed unstable performance. To address this, the `class_weight='balanced` parameter was applied to emphasize the minority class. To further improve performnce, a **stacking ensemble combined Random Forest and XGBoost predictions using a logistic regression meta-classifier**, leveraging the strengths of both models.
 
-<img src="/Users/apple/Desktop/promotion/images/model.png" style="zoom:50%;" />
+<img src="images/model.png" width="40%;" />
 
 ### Hyperparameter Fine-Tuning
 
